@@ -32,7 +32,7 @@ PlotSysAll(P_ControlledSys)
 
 % PI controller
 Kp = 0.15;
-Ki = 0.6;
+Ki = 0.1;
 Kd = 0;
 Tf = 0.01;
 PI = pid(Kp, Ki, Kd, Tf);
