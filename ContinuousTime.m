@@ -44,7 +44,7 @@ stepinfo(PI_ControlledCLSys)
 PlotSysAll(PI_ControlledSys)
 
 % PD controller
-Kp = 0.48;
+Kp = 0.49;
 Ki = 0;
 Kd = 0.08;
 Tf = 0.01;
