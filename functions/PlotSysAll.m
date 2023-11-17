@@ -4,11 +4,13 @@ function [Gain_Margin, Phase_Margin, Wcg, Wcp] = PlotSysAll(sys)
 % Noted that the given parameter is open-loop transfer function 'L'
 % Step respond
 subplot(2,2,1);
-step(feedback(sys, 1));                               
+ol_sys = sys;
+cl_sys = feedback(sys, 1);
+step(cl_sys);                               
 
 % Bode diagram with margin
 subplot(2,2,2);
-margin(sys);
+margin(ol_sys);
 grid on;
 [Gain_Margin,Phase_Margin, Wcg, Wcp] = margin(sys);
 
@@ -19,6 +21,6 @@ grid on;
 
 % Root locus 
 subplot(2,2,3)
-rlocus(sys);
+rlocus(cl_sys);
 grid on; 
 end

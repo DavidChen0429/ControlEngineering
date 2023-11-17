@@ -30,19 +30,6 @@ figure();
 stepinfo(P_ControlledCLSys)
 PlotSysAll(P_ControlledSys)
 
-% PI controller
-Kp = 0.15;
-Ki = 0.1;
-Kd = 0;
-Tf = 0.01;
-PI = pid(Kp, Ki, Kd, Tf);
-
-PI_ControlledSys = L * PI;
-PI_ControlledCLSys = feedback(PI_ControlledSys, 1);
-figure();
-stepinfo(PI_ControlledCLSys)
-PlotSysAll(PI_ControlledSys)
-
 % PD controller
 Kp = 0.49;
 Ki = 0;
