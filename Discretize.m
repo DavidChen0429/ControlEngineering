@@ -34,11 +34,12 @@ Kd = 0.3;
 Tf = 0.01;
 C_cdr = pid(Kp, Ki, Kd, Tf);
 
+Ts = 0.02;
 % discrete reference tracking (bode compare, step compare)
-C_drt_zoh = c2d(C_crt, 0.02, 'zoh');
-C_drt_tustin = c2d(C_crt, 0.02, 'tustin');
-C_drt_matched = c2d(C_crt, 0.02, 'matched');
+C_drt_zoh = c2d(C_crt, Ts, 'zoh');
+C_drt_tustin = c2d(C_crt, Ts, 'tustin');
+C_drt_matched = c2d(C_crt, Ts, 'matched');
 % discrete disturbance rejection (bode compare, step compare)
-C_ddr_zoh = c2d(C_cdr, 0.02, 'zoh');
-C_ddr_tustin = c2d(C_cdr, 0.02, 'tustin');
-C_ddr_matched = c2d(C_cdr, 0.02, 'matched');
+C_ddr_zoh = c2d(C_cdr, Ts, 'zoh');
+C_ddr_tustin = c2d(C_cdr, Ts, 'tustin');
+C_ddr_matched = c2d(C_cdr, Ts, 'matched');
