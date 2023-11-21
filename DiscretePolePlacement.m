@@ -19,14 +19,17 @@ Dd = ss_d.D;
 %% Pole placement
 Cb = [Bd, Ad*Bd, Ad^2*Bd]; % controllable
 
-damping_ratio = 0.69;
+damping_ratio = 0.50;
 theta = (pi-acos(damping_ratio));
-mod = -10;
+mod = -5;
 real = mod*cos(theta);
 img = mod*sin(theta);
 pole1 = real + img*1j;
 pole2 = real - img*1j;
-pCont=[-5.268 -2.9133+27.9300i -2.9133-27.9300i]; %poles in s-domain
+%pCont=[-20 -2.9133+27.9300i -2.9133-27.9300i]; %poles in s-domain
+%pCont=[-17.8337 -12.3574+34.7369i -12.3574-34.7369i]; %poles in s-domain
+pCont=[-34.6574 -22.2900+44.8028i -22.2900-44.8028i]; %poles in s-domain
+%pCont=[-10 pole1 pole2];
 pDisc=exp(pCont.*Ts); % poles in z-domain
 kCont=place(A,B,pCont);
 kDisc=place(Ad,Bd,pDisc);
