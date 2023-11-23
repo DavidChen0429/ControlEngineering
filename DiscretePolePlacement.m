@@ -53,6 +53,8 @@ sysclDisc1 = ss(Ad-Bd*kDisc1,Bd*kDisc1,Cd,Dd);
 sysclDisc2 = ss(Ad-Bd*kDisc2,Bd*kDisc2,Cd,Dd);
 sysclDisc3 = ss(Ad-Bd*kDisc3,Bd*kDisc3,Cd,Dd);
 sysclDisc4 = ss(Ad-Bd*kDisc4,Bd*kDisc4,Cd,Dd);
+sysclDiscF = ss(Ad-Bd*kDiscF,Bd*kDiscF,Cd,Dd);
+fw_gain = dcgain(sysclDiscF);
 t = 0:0.01:2;
 r = [ones(1,length(t)); 
     zeros(1,length(t)); 

@@ -19,11 +19,18 @@ Dd = ss_d.D;
 %% Pole placement
 %Cb = [Cd; Cd*Ad; Cd*Ad^2]; % observability
 kDisc=place(Ad,Bd,[0.5 0.4+0.3j 0.4-0.3j]);
+sysclDisc = ss(Ad-Bd*kDisc,Bd*kDisc,Cd,Dd);
 
 %% Create observer
-KDiscObe=acker(Ad',Cd',[0.2; 0.3+0.2j; 0.3-0.2j])'; %3*1
+KDiscObe=acker(Ad',Cd',[0.4; 0.3+0.2j; 0.3-0.2j])'; %3*1
 %KDiscObe=acker(Ad',Cd',[0.1; 0.1+0.1j; 0.1-0.1j])'; %3*1
 Aobs = Ad-KDiscObe*Cd;
 Bobs = [Bd KDiscObe];
 Cobs = eye(3);
 Dobs = zeros(3,3);
+
+%% Add integrator 
+%Aaug = [Ad zeros(3,1);-Cd 1];
+Aaug = Ad-Bd;
+buf_sys = ss(Aaug, Bd, Cd, Dd);
+dcgain(buf_sys)
