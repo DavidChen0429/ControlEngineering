@@ -39,8 +39,10 @@ PlotSysAll(PD_ControlledSys)
 
 % ========================== Pole Placement 
 kDiscF=place(Ad,Bd,[0.01 0.01+0.1j 0.01-0.1j]);
+p_cont = log([0.01 0.01+0.1j 0.01-0.1j])*50;
+kContF=place(A,B,p_cont);
 
-% ========================== LQR
+% ========================== LQRoriginal 
 R = 0.1;
 Q = diag([1000 0.001 0.001]);
 [Klqr,S,P] = lqr(ss_d,Q,R);
@@ -60,6 +62,8 @@ PlotSysAll(PD_ControlledSys)
 
 % ============================ Pole Placement
 kDiscF_redesign=place(Ad,Bd,[0.01 0.9+0.085j 0.9-0.085j]);
+p_cont = log([0.01 0.9+0.085j 0.9-0.085j])*50;
+kContF_redesign=place(A,B,p_cont);
 
 % ============================ LQR
 R2 = 750;
