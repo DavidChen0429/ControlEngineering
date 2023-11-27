@@ -49,18 +49,25 @@ sysclCont2 = ss(A-B*kCont2,B*kCont2,C,D);
 sysclCont3 = ss(A-B*kCont3,B*kCont3,C,D);
 sysclCont4 = ss(A-B*kCont4,B*kCont4,C,D);
 sysclContF = ss(A-B*kContF,B*kContF,C,D);
+%{
 sysclDisc1 = ss(Ad-Bd*kDisc1,Bd*kDisc1,Cd,Dd);
 sysclDisc2 = ss(Ad-Bd*kDisc2,Bd*kDisc2,Cd,Dd);
 sysclDisc3 = ss(Ad-Bd*kDisc3,Bd*kDisc3,Cd,Dd);
 sysclDisc4 = ss(Ad-Bd*kDisc4,Bd*kDisc4,Cd,Dd);
-sysclDiscF = ss(Ad-Bd*kDiscF,Bd*kDiscF,Cd,Dd);
-fw_gain = dcgain(sysclDiscF);
+%}
 t = 0:0.01:2;
 r = [ones(1,length(t)); 
     zeros(1,length(t)); 
     zeros(1,length(t))];
 x0 = zeros(size(sysclCont1.A, 1), 1);
 % Continuous
+%% Close the loop in code
+sysclDiscBuf = ss(Ad-Bd*kDiscF,Bd,Cd,Dd);
+Kdc = dcgain(sysclDiscBuf);
+sysclDiscF = ss(Ad-Bd*kDiscF,Bd*(1/Kdc),Cd,Dd);
+% step(sysclDiscF)
+
+%% Visualize the step response
 [y1, t, x1] = lsim(sysclCont1, r, t, x0);
 [y2, t, x2] = lsim(sysclCont2, r, t, x0);
 [y3, t, x3] = lsim(sysclCont3, r, t, x0);
