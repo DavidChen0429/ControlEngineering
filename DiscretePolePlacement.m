@@ -65,7 +65,7 @@ x0 = zeros(size(sysclCont1.A, 1), 1);
 sysclDiscBuf = ss(Ad-Bd*kDiscF,Bd,Cd,Dd);
 Kdc = dcgain(sysclDiscBuf);
 sysclDiscF = ss(Ad-Bd*kDiscF,Bd*(1/Kdc),Cd,Dd);
-% step(sysclDiscF)
+step(sysclDiscF)
 
 %% Visualize the step response
 [y1, t, x1] = lsim(sysclCont1, r, t, x0);
