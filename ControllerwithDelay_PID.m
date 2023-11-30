@@ -27,14 +27,21 @@ Dd = ss_d.D;
 Tf = 1/1000;
 C_cdr = pid(20, 100, 2, Tf); %p, i, d, tf
 C_ddr_tustin = c2d(C_cdr, Ts, 'tustin');
-
+% Disturbance Rejection
 C = pid(2.9, 15, .3, 0.01);
-
 L_new = tf(numerator, [1, 30, 200, 0, 0]); 
 C2 = pid(0.9, 0.7, 0.3, 0.01);
 c2d(C2, Ts, 'tustin')
+% Reference Tracking
+Crt1 = pid(0.49, 0, 0.08, 0.01);
+Crt2 = pid(0.4, 0, 0.05, 0.01);
+PD_rt1= L_new * Crt1;
+PD_clrt1 = feedback(PD_rt1, 1);
+PD_rt2= L_new * Crt2;
+PD_clrt2 = feedback(PD_rt2, 1);
+stepinfo(PD_clrt1)
+stepinfo(PD_clrt2)
 
-%{
 [y1, t1] = DisRejectVisual(L, C);
 [y3, t3] = DisRejectVisual(L_new, C);
 [y2, t2] = DisRejectVisual(L_new, C2);
@@ -47,10 +54,4 @@ stairs(t2,y2)
 hold off 
 grid off
 legend('Original','Time Delay Redesign')
-%}
 
-%% Augument State Space System
-Aaug = [Ad Bd;zeros(1,3) 0];
-Baug = [0;0;0;1];
-%Cbm = [Baug Aaug*Baug Aaug^2*Baug Aaug^3*Baug]  % rank = 4
-Caug = [1 0 0 0];
