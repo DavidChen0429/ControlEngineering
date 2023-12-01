@@ -52,15 +52,10 @@ syscl_scaled_rel_l = ss(Acl_rel_l,(1/Kdc_rel_l)*sys_DT.B,sys_DT.C,sys_DT.D,ts);
 figure()
 step(syscl_scaled_con_h), grid on, hold on
 step(syscl_scaled_rel_h)
-step(syscl_scaled_con_l), grid on, hold on
+step(syscl_scaled_con_l)
 step(syscl_scaled_rel_l)
 legend('Dominant complex conjugate poles','Real poles with 1 dominant pole','Complex conjugate poles with a fast dominant pole','Real poles with a fast dominant pole')
 hold off
-
-%figure()
-
-%legend()
-%hold off
 
 stepinfo(syscl_scaled_con_h)
 stepinfo(syscl_scaled_con_l)
