@@ -48,15 +48,15 @@ Q = diag([1000 0.001 0.001]);
 [Klqr,S,P] = lqr(ss_d,Q,R);
 
 %% Agument LQR 
-Adaug = [Ad zeros(size(Ad,1),1); -Cd 0];
-%Adaug = [Ad Bd; zeros(1,size(Ad,1)) 1];
+Adaug = [Ad zeros(3,1);-Cd 1];
 Bdaug = [Bd; 0];
-Cdaug = [Cd 0];
+Cdaug = [1 0 0 0];
 Ddaug = 0;
 Raug = 0.1;
 ss_daug = ss(Adaug,Bdaug,Cdaug,Ddaug);
 Qaug = diag([1 1 1 1]);
 [Klqr2,S2,P2] = lqr(ss_daug,Qaug,Raug);
-K2 = place(Adaug,Bdaug,[0.5783+0.2836i,0.5783-0.2836i,0.0150,0.01]);
+K2 = place(Adaug,Bdaug,[0.2,0.5783+0.2836i,0.5783-0.2836i,0.1]);
 %K2 = [10.6418,0.6377,0.0143,1]
+eig(Adaug-Bdaug*Klqr2)
 eig(Adaug-Bdaug*K2)

@@ -48,8 +48,3 @@ kDisc_dr=place(Adaug,Bdaug,[0.2 0.2+0.1j 0.2-0.1j 0.8]);
 kDisc_dr2=place(Aaug2,Baug2,[0.2 0.2+0.1j 0.2-0.1j 0.8 1]); % old control
 kDisc_dr_delay=place(Aaug2,Baug2,[0.2 0.2+0.1j 0.2-0.1j 0.8 0.1]); 
 kDisc_dr_delay2=place(Aaug2,Baug2,[0.2 0.2+0.1j 0.2-0.1j 0.12 0.1]); 
-
-%% LQR
-R = 0.1;
-Q = diag([1000 0.001 0.001]);
-[Klqr_old,S,P] = lqr(ss_d,Q,R);
