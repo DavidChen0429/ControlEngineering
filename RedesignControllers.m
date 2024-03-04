@@ -45,7 +45,7 @@ kContF=place(A,B,p_cont);
 % ========================== LQRoriginal 
 R = 0.1;
 Q = diag([1000 0.001 0.001]);
-[Klqr,S,P] = lqr(ss_d,Q,R);
+[Klqr,S,P] = dlqr(Ad,Bd,Q,R);
 
 %% Redesigned Controllers
 % ============================ PID
@@ -68,4 +68,4 @@ kContF_redesign=place(A,B,p_cont);
 % ============================ LQR
 R2 = 750;
 Q2 = diag([1000 0.001 0.001]);
-[Klqr2,S2,P2] = lqr(ss_d,Q2,R2);
+[Klqr2,S2,P2] = dlqr(Ad,Bd,Q2,R2);

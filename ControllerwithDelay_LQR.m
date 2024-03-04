@@ -32,20 +32,20 @@ clc
 R = 0.1;
 v = [1000 0.001 0.001];
 Q = diag(v);
-[Klqr_old,S,P] = lqr(ss_d,Q,R);
+[Klqr_old,S,P] = dlqr(Ad,Bd,Q,R);
 
 % without delay without redesign
 R2 = 0.1;
 v2 = [1000 0.001 0.001 1];
 Q2 = diag(v2);
-[Klqr_old2,S2,P2] = lqr(ss_daug,Q2,R2);
+[Klqr_old2,S2,P2] = dlqr(Aaug,Baug,Q2,R2);
 Klqr_old2
 eig(Aaug-Baug*Klqr_old2)
 
 R3 = 100000;
 v3 = [.001 0.0001 0.00001 .001];
 Q3 = diag(v3);
-[Klqr_new,S3,P3] = lqr(ss_daug,Q3,R3);
+[Klqr_new,S3,P3] = dlqr(Aaug,Baug,Q3,R3);
 Klqr_new
 eig(Aaug-Baug*Klqr_new)
 Klqr_new=place(Aaug,Baug,[-0.4 -0.5069+0.2i -0.5069-0.2i -0.1])
